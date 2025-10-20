@@ -8,6 +8,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
+  "bin": {
+    "catching-proxy": "./cli.js"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
