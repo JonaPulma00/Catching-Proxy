@@ -1,7 +1,8 @@
 #!/usr/bin/env node
-
 import { Command } from "commander";
-import { createSpinner } from "nanospinner";
+import { ServerOpts } from "../interfaces/options.js";
+
+
 
 const program = new Command();
 
@@ -20,32 +21,27 @@ program
     "3000"
   )
   .option("-o, --origin <url>", "specify the url you want the proxy to catch");
-// .command("list")
-// .description("List all items")
-// .action(async () => {
-//   console.log(chalk.bgGreen("Listing items..."));
-//   createSpinner("wait a second").start();
-//   await sleep();
-//   console.log("Done!");
-// });
 
 program.parse(process.argv);
 
 const options = program.opts();
 
-const startServer = async () => {
+
+export const serverOptions: ServerOpts= {
+  portNumber : options.port,
+  url: options.origin
+}
+const main = async () => {
   try {
     if (options.port) {
-      createSpinner("Starting the server...").start();
+      console.log("Starting the server...");
       await sleep();
-      createSpinner("Server started correctly").success();
-      console.log("Options: ", options);
+      console.log(serverOptions.portNumber)
+      console.log("testing")
     }
   } catch (error: any) {
-    console.log(
-      createSpinner("Error while trying to start the server: ", error).error()
-    );
+    console.log("Error while trying to start the server: ", error);
   }
 };
 
-startServer();
+main();

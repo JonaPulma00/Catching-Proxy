@@ -1,4 +1,4 @@
-export interface Options {
-  port: number,
+export interface ServerOpts {
+  portNumber: number | undefined;
   url : string
 }

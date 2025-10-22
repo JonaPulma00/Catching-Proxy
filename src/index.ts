@@ -1,8 +1,12 @@
 import express from 'express';
 import type { Request, Response } from 'express';
+import { ServerOpts } from './interfaces/options.js';
 
+
+let options! : ServerOpts;
 const app = express();
-const PORT = 3000;
+
+const PORT = options.portNumber;
 
 app.use(express.json())
 
