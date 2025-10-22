@@ -1,8 +1,6 @@
 #!/usr/bin/env node
 
 import { Command } from "commander";
-import chalk from "chalk";
-import chalkAnimation from "chalk-animation";
 import { createSpinner } from "nanospinner";
 
 const program = new Command();
@@ -35,7 +33,19 @@ program.parse(process.argv);
 
 const options = program.opts();
 
-if (options.debug) {
-  console.log("You entered debug mode!");
-  console.log("Options: ", options);
-}
+const startServer = async () => {
+  try {
+    if (options.port) {
+      createSpinner("Starting the server...").start();
+      await sleep();
+      createSpinner("Server started correctly").success();
+      console.log("Options: ", options);
+    }
+  } catch (error: any) {
+    console.log(
+      createSpinner("Error while trying to start the server: ", error).error()
+    );
+  }
+};
+
+startServer();
